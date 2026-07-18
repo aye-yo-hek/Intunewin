@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>PayloadContent</key>
+    <array>
+        <dict>
+            <key>PayloadDisplayName</key>
+            <string>Visual Studio Code Auto-Update</string>
+            <key>PayloadIdentifier</key>
+            <string>com.microsoft.VSCode.policy</string>
+            <key>PayloadType</key>
+            <string>com.microsoft.VSCode</string>
+            <key>PayloadUUID</key>
+            <string>A1B2C3D4-E5F6-7890-ABCD-EF1234567890</string>
+            <key>PayloadVersion</key>
+            <integer>1</integer>
+            
+            <!-- Configure Auto-Update Mode -->
+            <!-- Values: default, start, manual, none -->
+            <key>UpdateMode</key>
+            <string>default</string>
+            
+            <!-- Disable Telemetry -->
+            <!-- Values: all, error, crash, off -->
+            <key>TelemetryLevel</key>
+            <string>off</string>
+            
+            <!-- Optional: Disable Feedback -->
+            <!-- Uncomment to enable:
+            <key>EnableFeedback</key>
+            <false/>
+            -->
+        </dict>
+    </array>
+    <key>PayloadDescription</key>
+    <string>Configures Visual Studio Code to automatically download and install updates, and disables telemetry. Policy applies to all users on the device.</string>
+    <key>PayloadDisplayName</key>
+    <string>VS Code Auto-Update and Privacy Policy</string>
+    <key>PayloadIdentifier</key>
+    <string>com.yourcompany.vscode.autoupdate</string>
+    <key>PayloadOrganization</key>
+    <string>Your Organization</string>
+    <key>PayloadRemovalDisallowed</key>
+    <false/>
+    <key>PayloadScope</key>
+    <string>System</string>
+    <key>PayloadType</key>
+    <string>Configuration</string>
+    <key>PayloadUUID</key>
+    <string>B2C3D4E5-F6A7-8901-BCDE-F12345678901</string>
+    <key>PayloadVersion</key>
+    <integer>1</integer>
+</dict>
+</plist>

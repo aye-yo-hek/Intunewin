@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Registry / settings-only MSI template - for deploying registry key edits,
+  policy settings, or config "templates" with no files to install.
+
+  Build with:
+    wix build ConfigTemplate.wxs -o output\<AppName>.msi
+
+  Then drop the resulting .msi in Inbox\ (or Apps\<AppName>\Source\) and run
+  Process-Inbox.ps1 / Create-IntunePackage.ps1 as usual - it already knows how
+  to read the ProductCode out of any .msi and generate install/uninstall/detect
+  scripts from it.
+
+  Before reusing: generate a fresh UpgradeCode GUID with `[guid]::NewGuid()` in
+  PowerShell - never reuse the placeholder or another app's GUID.
+-->
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+
+  <Package Name="ConfigTemplateName"
+           Manufacturer="Your Company"
+           Version="1.0.0.0"
+           UpgradeCode="PUT-A-REAL-GUID-HERE"
+           InstallerVersion="200"
+           Compressed="yes"
+           Scope="perMachine">
+
+    <MediaTemplate EmbedCab="yes" />
+
+    <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed."
+                  AllowSameVersionUpgrades="yes" />
+
+    <Feature Id="MainFeature" Title="ConfigTemplateName" Level="1">
+      <ComponentRef Id="RegistryEntries" />
+    </Feature>
+
+    <!-- No files installed - registry-only component under the install root -->
+    <StandardDirectory Id="TARGETDIR">
+      <Component Id="RegistryEntries" Guid="*">
+
+        <!-- Repeat this RegistryKey block (or add RegistryValue lines inside
+             one) for every key/value the user asked for. Root is one of:
+             HKLM (machine-wide, most common for Intune) or HKCU (per-user). -->
+        <RegistryKey Root="HKLM" Key="SOFTWARE\YourCompany\YourSetting">
+          <RegistryValue Type="string" Name="ExampleValueName" Value="ExampleValue" KeyPath="yes" />
+          <!-- Type is one of: string, integer, expandable, multiString, binary -->
+        </RegistryKey>
+
+      </Component>
+    </StandardDirectory>
+
+  </Package>
+</Wix>

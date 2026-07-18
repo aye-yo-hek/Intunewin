@@ -1,0 +1,9 @@
+Package details:
+CCDA (6.8.0)
+APRO (25.1)
+
+Package Name: Acrobat
+Package Type: preCreated
+Platform: WIN64
+Locale: en_US
+Use OS Locale: Enabled

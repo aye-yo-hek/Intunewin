@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- WiX v4 schema. Build with: wix build Product.wxs -o output\YourApp.msi -->
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+
+  <Package Name="YourAppName"
+           Manufacturer="Your Company"
+           Version="1.0.0.0"
+           UpgradeCode="PUT-A-REAL-GUID-HERE"
+           InstallerVersion="200"
+           Compressed="yes"
+           Scope="perMachine">
+
+    <MediaTemplate EmbedCab="yes" />
+
+    <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed."
+                  AllowSameVersionUpgrades="yes" />
+
+    <Feature Id="ProductFeature" Title="YourAppName" Level="1">
+      <ComponentGroupRef Id="ProductComponents" />
+      <ComponentGroupRef Id="ProductShortcuts" />
+    </Feature>
+
+    <StandardDirectory Id="ProgramFilesFolder">
+      <Directory Id="INSTALLFOLDER" Name="YourAppName" />
+    </StandardDirectory>
+
+    <StandardDirectory Id="ProgramMenuFolder">
+      <Directory Id="ApplicationProgramsFolder" Name="YourAppName" />
+    </StandardDirectory>
+
+  </Package>
+
+  <!-- Fragment: Product Components -->
+  <Fragment>
+    <ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+
+      <!-- Example: Install an EXE file -->
+      <Component Id="MainExecutable" Guid="*">
+        <File Id="MainExe"
+              Source="$(var.SourceDir)\YourApp.exe"
+              KeyPath="yes" />
+      </Component>
+
+      <!-- Example: Install a DLL file -->
+      <Component Id="SupportLibrary" Guid="*">
+        <File Id="SupportDll"
+              Source="$(var.SourceDir)\Support.dll"
+              KeyPath="yes" />
+      </Component>
+
+      <!-- Example: Registry entries written by this app's install -->
+      <Component Id="RegistryEntries" Guid="*">
+        <RegistryKey Root="HKLM"
+                     Key="Software\YourCompany\YourAppName"
+                     ForceCreateOnInstall="yes"
+                     ForceDeleteOnUninstall="yes">
+          <RegistryValue Type="string"
+                         Name="InstallPath"
+                         Value="[INSTALLFOLDER]"
+                         KeyPath="yes"/>
+          <RegistryValue Type="string"
+                         Name="Version"
+                         Value="[ProductVersion]"/>
+        </RegistryKey>
+      </Component>
+
+    </ComponentGroup>
+  </Fragment>
+
+  <!-- Fragment: Start Menu Shortcuts -->
+  <Fragment>
+    <ComponentGroup Id="ProductShortcuts" Directory="ApplicationProgramsFolder">
+
+      <Component Id="ApplicationShortcut" Guid="*">
+        <Shortcut Id="ApplicationStartMenuShortcut"
+                  Name="YourAppName"
+                  Description="Launch YourAppName"
+                  Target="[INSTALLFOLDER]YourApp.exe"
+                  WorkingDirectory="INSTALLFOLDER"/>
+
+        <Shortcut Id="UninstallProduct"
+                  Name="Uninstall YourAppName"
+                  Description="Uninstalls YourAppName"
+                  Target="[SystemFolder]msiexec.exe"
+                  Arguments="/x [ProductCode]"/>
+
+        <RemoveFolder Id="ApplicationProgramsFolder" On="uninstall"/>
+        <RegistryValue Root="HKCU"
+                       Key="Software\YourCompany\YourAppName"
+                       Name="installed"
+                       Type="integer"
+                       Value="1"
+                       KeyPath="yes"/>
+      </Component>
+
+    </ComponentGroup>
+  </Fragment>
+
+</Wix>

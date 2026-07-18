@@ -1,0 +1,43 @@
+# Windows
+desktop.ini
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Binary installers & packages (too large for Git)
+*.intunewin
+*.exe
+*.msi
+*.msp
+*.cab
+*.zip
+*.7z
+
+# Old builds
+_old-builds/
+
+# Intune packaging tool (download separately)
+Tools/IntuneWinAppUtil.exe
+
+# Adobe Acrobat full installer tree (large)
+Apps/AdobeAcrobatPro/Source/Acrobat/Build/
+
+# Xerox driver binaries
+Apps/XeroxPrinter/Source/Driver/
+
+# Zoom installer
+Apps/Zoom/Source/ZoomInstallerFull.msi
+
+# Autodesk MSIs
+Apps/Autodesk/Source/*.msi
+
+# Python installer
+Apps/Python314/Source/python-*.exe
+
+# VS Code installers
+Apps/VSCodeWindows/Source/VSCode*.exe
+Apps/VSCodeMac/Source/
+
+# Inbox drop folder contents (temporary)
+Inbox/*
+!Inbox/.gitkeep
