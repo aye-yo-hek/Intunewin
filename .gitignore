@@ -9,6 +9,8 @@ Desktop.ini
 *.exe
 *.msi
 *.msp
+*.pkg
+*.dmg
 *.cab
 *.zip
 *.7z
